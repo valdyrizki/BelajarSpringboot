@@ -43,30 +43,19 @@ public class BukuController {
         return ResponseEntity.ok(updatedBuku);
     }
 
-//    @DeleteMapping("/{Id}")
-//    public String deleteBuku(@PathVariable (value="Id") Long Id){
-//        Buku buku = bukuRepository.getOne(Id);
-//        String result = "";
-//        if(buku == null) {
-//            result = "id "+Id+" tidak ditemukan";
-//            return result;
-//        }
-//        result = "id "+Id+" berhasil di hapus";
-//        bukuRepository.Delete(Id);
-//        return result;
-//    }
+    @DeleteMapping("/{id}")
+    public String deleteBuku(@PathVariable (value="id") Long id){
+        Buku buku = bukuRepository.getOne(id);
+        String result = "";
+        if(buku == null) {
+            result = "id "+id+" tidak ditemukan";
+            return result;
+        }
+        result = "id "+id+" berhasil di hapus";
+        bukuRepository.delete(buku);
+        return result;
+    }
 
-//    @GetMapping("/{Id}")
-//    public ResponseEntity<Buku> getBukuById(@PathVariable(value="Id") Long Id){
-//        Buku buku = bukuRepository.getOne(Id);
-//        if(buku == null) return ResponseEntity.notFound().build();
-//        return ResponseEntity.ok().body(buku);
-//    }
-
-//@GetMapping("/sortid")
-//public List<Buku> sortid(@RequestParam(value="id")Long Id){
-//    return bukuRepository.findByIdBukus(Id);
-//}
     //http://localhost:8080/buku/sortbuku?title=Buku
     @GetMapping("/sortbuku")
     public List<Buku> sortbuku(@RequestParam(value="title")String titleBook){
